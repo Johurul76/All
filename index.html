@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile">
+            <img src="Img/User profile.jpg" alt="User Profile Picture" class="profile-pic">
+            <div class="profile-info">
+                <h4>Mr. Johurul Ahomed</h4>
+                <p>ব্যালেন্স: 9600</p>
+            </div>
+        </div>
+
+        <!-- Company Section -->
+        <div class="company-section">
+            <img src="Img/Logo.png" alt="Company Logo" class="company-logo">
+            <h1>BD ALL SARVICE</h1>
+        </div>
+
+        <!-- Button Links -->
+        <div class="links">
+            <div class="link-row">
+                <button onclick="showContent('serverCopy')">
+                    <img src="Img/sv.png" alt="Server Copy"> সার্ভার কপি
+                </button>
+                <button onclick="showContent('autoNID')">
+                    <img src="Img/images-1.png" alt="Auto NID"> অটো এন আইডি মেক
+                </button>
+                <button onclick="showContent('manualNID')">
+                    <img src="Img/nid.png" alt="Manual NID"> ম্যানুয়ালি এনআইডি
+                </button>
+                <button onclick="showContent('biometric')">
+                    <img src="Img/bio.png" alt="Biometric"> সিমের বায়োমেট্রিক
+                </button>
+            </div>
+            <div class="link-row">
+                <button onclick="showContent('accountInfo')">
+                    <img src="Img/account info .jpg" alt="Account Info"> একাউন্ট ইনফো
+                </button>
+                <button onclick="showContent('birthReg')">
+                    <img src="Img/birth.png" alt="Birth Registration"> জন্ম নিবন্ধন মেক
+                </button>
+                <button onclick="showContent('autoRecharge')">
+                    <img src="Img/Add Many.png" alt="Auto Recharge"> অটো রিচার্জ
+                </button>
+                <button onclick="showContent('profileUpdate')">
+                    <img src="Img/profile .jpg" alt="Profile Update"> প্রফাইল আপডেট
+                </button>
+            </div>
+        </div>
+
+        <!-- Content View Section -->
+        <div id="content-view">
+            <!-- এখানে বাটন ক্লিক করলে কন্টেন্ট দেখাবে -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
