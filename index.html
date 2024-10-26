@@ -1,160 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Task Dashboard</title>
-<style>
-    /* Basic Styling */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; }
-    .dashboard { width: 100%; max-width: 400px; margin: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .header h2 { font-size: 20px; color: #333; }
-    .balance { display: flex; align-items: center; }
-    .balance img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
-    .balance-info { text-align: right; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-    .button { flex: 1 1 48%; background-color: #3498db; color: #fff; padding: 15px; border-radius: 8px; text-align: center; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
-    .content { margin-top: 20px; }
-    .task-list { list-style-type: none; }
-    .task { padding: 8px; background: #e8f6f8; margin: 5px 0; border-radius: 5px; display: flex; flex-direction: column; }
-    .task-buttons { display: flex; gap: 5px; }
-    .task-buttons button { padding: 5px 10px; border-radius: 4px; border: none; cursor: pointer; color: #fff; }
-    .start-btn { background-color: #3498db; }
-    .claim-btn { background-color: #27ae60; }
-    .complete-btn { background-color: #e74c3c; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form with Image</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            transition: transform 0.2s;
+        }
+        .form-container:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            display: block;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            width: 80px; /* Adjust the size of the image */
+            height: 80px; /* Adjust the size of the image */
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center; /* Centering the input fields */
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 80%; /* Reduced width for better centering */
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            margin: 0 auto; /* Centering the input fields */
+            display: block; /* Display block for centering */
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+        input[type="submit"] {
+            width: 80%; /* Reduced width for better centering */
+            padding: 12px;
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin: 0 auto; /* Centering the submit button */
+            display: block; /* Display block for centering */
+        }
+        input[type="submit"]:hover {
+            background-color: #2575fc;
+        }
+        .message {
+            display: none;
+            color: green;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 
-<div class="dashboard">
-    <div class="header">
-        <h2 id="greeting">Welcome, User</h2>
-        <div class="balance">
-            <img src="https://via.placeholder.com/40" alt="Profile">
-            <div class="balance-info">
-                <h4 id="username">User Name</h4>
-                <p>Balance: <span id="balance">৳0</span></p>
-            </div>
+<div class="form-container">
+    <img src="https://scontent.frjh4-1.fna.fbcdn.net/v/t1.6435-9/201559136_960738514692948_676907750507524628_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=6DM6tZEhGwkQ7kNvgHtkqpY&_nc_ht=scontent.frjh4-1.fna&_nc_gid=AhN0JKIjdNxh8l4Xc8TfHJK&oh=00_AYDPKVURODmWeFf58StrpqlMeTiajKfD8V6iR4G8O49BYQ&oe=67208F81" alt="Profile Picture" class="profile-image">
+    <h2>Register</h2>
+    <form id="registrationForm" action="https://script.google.com/macros/s/AKfycbww3HetqR9E0DkN-UaIFq0ZKsLQniqG_RLt4RBj2O5jFzhhPv1Tab_SQcYf6jM9En34kA/exec" method="post" onsubmit="showMessage(event)">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
         </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="number">Phone Number:</label>
+            <input type="text" id="number" name="number" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <input type="submit" value="Register">
+    </form>
+    <div class="message" id="successMessage">Data has been successfully saved.</div>
+    <div class="footer">
+        <p>&copy; 2024 Powered by Mr. Johurul Ahomed</p>
     </div>
-
-    <div class="buttons">
-        <div class="button" onclick="showTodayTasks()">Today Task</div>
-        <div class="button" onclick="showCompleteTasks()">Complete Task</div>
-        <div class="button" onclick="showWithdraw()">Withdraw</div>
-        <div class="button" onclick="showMyAccount()">My Account</div>
-    </div>
-
-    <div class="content" id="content"></div>
 </div>
 
 <script>
-    let balance = 0;
-    let tasks = Array.from({length: 10}, (_, i) => ({
-        id: i + 1,
-        name: `Task ${i + 1}`,
-        videoLink: `https://example.com/video${i + 1}`,
-        started: false,
-        claimed: false,
-        completed: false
-    }));
-
-    function updateBalance() {
-        document.getElementById('balance').textContent = `৳${balance}`;
+    function showMessage(event) {
+        event.preventDefault(); // Prevents form submission
+        var form = document.getElementById('registrationForm');
+        
+        // Sending form data to the server
+        var formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Displaying success message
+            var message = document.getElementById('successMessage');
+            message.style.display = 'block';
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 3000); // Hides message after 3 seconds
+            form.reset(); // Resets the form
+        })
+        .catch(error => console.error('Error:', error));
     }
-
-    function showTodayTasks() {
-        const content = document.getElementById('content');
-        const activeTasks = tasks.filter(task => !task.completed);
-        content.innerHTML = '<h3>Today\'s Tasks</h3><ul class="task-list">' +
-            (activeTasks.length ? activeTasks.map(task => `
-                <li class="task">
-                    <span>${task.name}</span>
-                    <div class="task-buttons">
-                        ${!task.started ? `<button class="start-btn" onclick="startTask(${task.id})">Start</button>` : ''}
-                        ${task.started && !task.claimed ? `<button class="claim-btn" onclick="claimTask(${task.id})">Claim</button>` : ''}
-                        ${task.claimed && !task.completed ? `<button class="complete-btn" onclick="completeTask(${task.id})">Complete</button>` : ''}
-                    </div>
-                </li>`
-            ).join('') : '<li>No tasks available</li>') +
-            '</ul>';
-    }
-
-    function startTask(id) {
-        const task = tasks.find(t => t.id === id);
-        if (task) {
-            task.started = true;
-            window.open(task.videoLink, '_blank');
-            showTodayTasks();
-        }
-    }
-
-    function claimTask(id) {
-        const task = tasks.find(t => t.id === id);
-        if (task && task.started) {
-            task.claimed = true;
-            showTodayTasks();
-        }
-    }
-
-    function completeTask(id) {
-        const task = tasks.find(t => t.id === id);
-        if (task && task.claimed) {
-            task.completed = true;
-            balance += 2;
-            updateBalance();
-            showTodayTasks();
-        }
-    }
-
-    function showCompleteTasks() {
-        const completedTasks = tasks.filter(task => task.completed);
-        const content = document.getElementById('content');
-        content.innerHTML = '<h3>Completed Tasks</h3><ul class="task-list">' +
-            (completedTasks.length ? completedTasks.map(task => `<li>${task.name}</li>`).join('') : '<li>No tasks completed</li>') +
-            '</ul>';
-    }
-
-    function showWithdraw() {
-        const content = document.getElementById('content');
-        content.innerHTML = `
-            <h3>Withdraw</h3>
-            <input type="text" id="bkashNumber" placeholder="Bkash Number">
-            <input type="number" id="withdrawAmount" placeholder="Amount">
-            <button onclick="withdraw()">Submit</button>`;
-    }
-
-    function withdraw() {
-        const amount = parseFloat(document.getElementById('withdrawAmount').value);
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
-            updateBalance();
-            alert('Withdraw successful');
-        } else {
-            alert('Invalid amount');
-        }
-    }
-
-    function showMyAccount() {
-        document.getElementById('content').innerHTML = `
-            <h3>My Account</h3>
-            <p><strong>Name:</strong> User Name</p>
-            <p><strong>Mobile:</strong> 0123456789</p>
-            <p><strong>Email:</strong> user@example.com</p>`;
-    }
-
-    function setGreeting() {
-        const hours = new Date().getHours();
-        let greeting = 'Good Evening';
-        if (hours < 12) greeting = 'Good Morning';
-        else if (hours < 18) greeting = 'Good Afternoon';
-        document.getElementById('greeting').textContent = `${greeting}, User`;
-    }
-
-    setGreeting();
-    updateBalance();
 </script>
 
 </body>
