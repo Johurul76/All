@@ -3,275 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bKash Confirmation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @page {
-            size: A4;
-            margin: 0.5in; /* 0.5 inch margin */
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f3f3f3; /* Light grey background */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align to the start */
-            height: 100vh; /* Full viewport height */
+            background-color: #f4f4f4;
         }
-
-        .card {
-            background-color: #ffffff;
-            width: 100%;
+        .container {
             max-width: 800px;
+            margin: 20px auto;
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
-        .card-header {
-            background-color: transparent; /* Background color removed */
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* Align buttons side by side */
+            margin: 20px 0;
+        }
+        .btn {
+            width: 130px; /* Slightly reduced width */
             padding: 10px;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-            position: relative;
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 28px;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-shadow: none; /* Remove shadow */
-            color: #000; /* Set the text color to default (black) */
-            border-bottom: 2px solid #00796b; /* A new bottom border for style */
-            padding-bottom: 10px;
-        }
-
-        .date {
-            font-size: 14px;
-            color: #333333;
-            font-weight: 700;
-            text-align: center;
-            margin-top: 5px;
-            text-shadow: none; /* Remove shadow */
-        }
-
-        .barcode {
-            margin-top: 15px;
-            width: 120px; /* Smaller width */
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-        }
-
-        .form-container {
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .form-group button {
-            background-color: #00796b;
+            font-size: 16px;
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-        }
-
-        .form-group button:hover {
-            background-color: #005e54;
-        }
-
-        .view-container {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .info p {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            font-size: 16px;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        .info p i {
-            width: 25px;
             text-align: center;
-            color: #00796b;
-            margin-right: 10px;
-            font-size: 18px;
         }
-
-        .info p span {
-            font-weight: 700;
-            color: #555;
-            width: 180px;
+        .btn:hover {
+            background-color: #0056b3;
         }
-
-        .signature {
-            text-align: right;
-            margin-top: 20px;
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
         }
-
-        .signature img {
-            width: 60px;
-            height: 60px;
+        .stat {
+            flex: 1;
+            background: #28a745;
+            color: white;
+            padding: 20px;
+            margin: 0 10px;
             border-radius: 5px;
+            text-align: center;
         }
-
-        @media (max-width: 600px) {
-            .card {
-                padding: 15px;
-            }
-
-            .card-header h2 {
-                font-size: 20px;
-            }
-
-            .date {
-                font-size: 12px;
-            }
-
-            .barcode {
-                width: 100px; /* Smaller width on mobile */
-            }
-
-            .signature img {
-                width: 50px;
-                height: 50px;
-            }
+        .stat span {
+            display: block;
+            font-size: 1.5em;
+        }
+        .task {
+            margin: 15px 0;
+            padding: 15px;
+            background: #e7e7e7;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .completed-tasks {
+            margin-top: 20px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <div class="card" id="confirmationCard">
-        <div class="card-header">
-            <h2>bKash Confirmation Info</h2>
-            <div class="date" id="currentDate"></div>
-            <canvas id="qrcodeCanvas" class="barcode"></canvas>
-        </div>
 
-        <div class="form-container">
-            <div class="form-group">
-                <label for="bKashAccount">bKash Account:</label>
-                <input type="text" id="bKashAccount" placeholder="Enter bKash Account" required>
-            </div>
-            <div class="form-group">
-                <label for="bKashName">bKash Name:</label>
-                <input type="text" id="bKashName" placeholder="Enter bKash Name" required>
-            </div>
-            <div class="form-group">
-                <button onclick="updateInfo()">Submit</button>
-            </div>
-        </div>
-
-        <div class="view-container" id="viewContainer">
-            <div class="card-body" id="cardBody">
-                <div class="info">
-                    <p>
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>bKash Account:</span> <span id="accountDisplay"></span>
-                    </p>
-                    <p>
-                        <i class="fas fa-user"></i>
-                        <span>bKash Name:</span> <span id="nameDisplay"></span>
-                    </p>
-                    <p>
-                        <i class="fas fa-university"></i>
-                        <span>Bank A/C Title:</span> MD. ZOHURUL ISLAM
-                    </p>
-                    <p>
-                        <i class="fas fa-money-bill-wave"></i>
-                        <span>Amount + Charge:</span> BDT 100 + BDT 0
-                    </p>
-                    <p>
-                        <i class="fas fa-wallet"></i>
-                        <span>Balance:</span> BDT 100
-                    </p>
-                </div>
-                <div class="signature">
-                    <img src="https://drive.google.com/uc?export=view&id=1NAt6GxUEJ7Ocw-oV2oRmUtT7Ukmvxx23" alt="Signature">
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h1>Dashboard</h1>
+    <div class="button-container">
+        <button class="btn" id="todayTaskButton"><i class="fas fa-tasks"></i> Today's Task</button>
+        <button class="btn" id="completedTaskButton"><i class="fas fa-check-circle"></i> Completed Task</button>
+        <button class="btn"><i class="fas fa-exclamation-triangle"></i> Missing Task</button>
+        <button class="btn"><i class="fas fa-wallet"></i> Withdraw</button>
+        <button class="btn"><i class="fas fa-user-circle"></i> My Account</button>
+        <button class="btn"><i class="fas fa-headset"></i> Help Line</button>
     </div>
 
-    <script>
-        function displayCurrentDate() {
-            const dateElement = document.getElementById('currentDate');
-            const today = new Date();
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            const formattedDate = today.toLocaleDateString('en-US', options);
-            dateElement.innerText = 'Date: ' + formattedDate;
+    <div class="stats">
+        <div class="stat">
+            <span>Today's Task</span>
+            <span id="currentTasksCount">0</span>
+        </div>
+        <div class="stat">
+            <span>Completed Tasks</span>
+            <span id="completeTask">0</span>
+        </div>
+        <div class="stat">
+            <span>Missing Tasks</span>
+            <span id="missingTask">10</span>
+        </div>
+        <div class="stat">
+            <span>Balance</span>
+            <span id="balance">0</span> Taka
+        </div>
+    </div>
+    
+    <h2>Today's Tasks</h2>
+    <div id="tasks" class="task-list"></div>
+    
+    <h2>Completed Tasks</h2>
+    <div id="completedTasks" class="completed-tasks"></div>
+</div>
+
+<script>
+    const tasks = [
+        "https://youtu.be/lMEyQ-RCqgk?si=zDI0Mt0cC7QBoeG4",
+        "https://youtu.be/5lZ32NuVhGE?si=QYp1MDUqPL-wnmtZ",
+        "https://youtu.be/okRnWVZK8ME?si=1vf7fY3LZyujfQjv",
+        "https://youtu.be/Eb0f7P3avoM?si=iQuCgY5rdDVFBclX",
+        "https://youtu.be/dZorT4-a-V0?si=RSiDdUkWvxwdfuaF",
+        "https://youtu.be/ydDt6su2Tys?si=DrhOzYxTyJ2ZAnWe",
+        "https://youtu.be/dfc9sdEiN9o?si=i3omol8TLFleHBLJ",
+        "https://youtu.be/-QLXUFqmzTc?si=HPb-vpCndrsyjTA1",
+        "https://youtu.be/8HZaoLfYg5c?si=kwDHRLvmvcPRKz0z",
+        "https://youtu.be/weOBO6q5XsY?si=rrl-jgon8N-OpyJs"
+    ];
+
+    let completeTaskCount = 0;
+    let missingTaskCount = tasks.length;
+    let balance = 0;
+    let completedTasksList = [];
+
+    function updateStats() {
+        document.getElementById('missingTask').innerText = missingTaskCount;
+        document.getElementById('completeTask').innerText = completeTaskCount;
+        document.getElementById('balance').innerText = balance;
+    }
+
+    function displayTasks() {
+        const taskList = document.getElementById('tasks');
+        taskList.innerHTML = ''; // Clear previous tasks
+
+        for (let i = 0; i < 10; i++) {
+            const taskIndex = Math.floor(Math.random() * tasks.length);
+            const taskElement = document.createElement('div');
+            taskElement.className = 'task';
+            taskElement.innerHTML = `
+                <span>Video Task ${taskIndex + 1}</span>
+                <button class="btn" onclick="completeTask(${taskIndex})"><i class="fas fa-check"></i> Complete</button>
+            `;
+            taskList.appendChild(taskElement);
         }
 
-        function updateInfo() {
-            const accountInput = document.getElementById('bKashAccount').value.trim();
-            const nameInput = document.getElementById('bKashName').value.trim();
+        document.getElementById('currentTasksCount').innerText = '10'; // Update task count
+    }
 
-            if (accountInput === '' || nameInput === '') {
-                alert('Please enter both bKash Account and Name.');
-                return;
-            }
+    function completeTask(taskIndex) {
+        completeTaskCount++;
+        missingTaskCount--;
+        balance += 10;
+        completedTasksList.push(`Task ${taskIndex + 1}: ${tasks[taskIndex]}`); // Add to completed tasks list
+        updateStats();
+        window.open(tasks[taskIndex], '_blank'); // Open the video in a new tab
+    }
 
-            document.getElementById('accountDisplay').innerText = accountInput;
-            document.getElementById('nameDisplay').innerText = nameInput;
+    function displayCompletedTasks() {
+        const completedTasksContainer = document.getElementById('completedTasks');
+        completedTasksContainer.innerHTML = ''; // Clear previous completed tasks
 
-            const qrCanvas = document.getElementById('qrcodeCanvas');
-            QRCode.toCanvas(qrCanvas, nameInput, { 
-                width: 120, // Adjusted width for smaller barcode
-                height: 120, // Adjusted height for smaller barcode
-                margin: 0 
-            }, function (error) {
-                if (error) console.error(error);
-            });
+        completedTasksList.forEach(task => {
+            const taskElement = document.createElement('div');
+            taskElement.innerText = task;
+            completedTasksContainer.appendChild(taskElement);
+        });
+    }
 
-            document.querySelector('.form-container').style.display = 'none';
-            document.getElementById('viewContainer').style.display = 'block';
+    document.getElementById('todayTaskButton').addEventListener('click', displayTasks);
+    document.getElementById('completedTaskButton').addEventListener('click', displayCompletedTasks);
 
-            setTimeout(() => downloadImage(nameInput, accountInput), 500);
-        }
+    updateStats();
+</script>
 
-        function downloadImage(name, account) {
-            const confirmationCard = document.getElementById('confirmationCard');
-
-            html2canvas(confirmationCard, { scale: 1.5 }).then((canvas) => {
-                const link = document.createElement('a');
-                link.href = canvas.toDataURL('image/jpeg');
-                link.download = `${name}_${account}.jpg`; // File name based on input values
-                link.click();
-            });
-        }
-
-        displayCurrentDate();
-    </script>
 </body>
 </html>
