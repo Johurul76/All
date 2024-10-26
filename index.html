@@ -4,63 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* Align buttons side by side */
+            margin: 20px 0;
+        }
+        .btn {
+            width: 130px; /* Slightly reduced width */
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .stat {
+            flex: 1;
+            background: #28a745;
+            color: white;
+            padding: 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat span {
+            display: block;
+            font-size: 1.5em;
+        }
+        .task {
+            margin: 15px 0;
+            padding: 15px;
+            background: #e7e7e7;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .completed-tasks {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Profile Section -->
-        <div class="profile">
-            <img src="Img/User profile.jpg" alt="User Profile Picture" class="profile-pic">
-            <div class="profile-info">
-                <h4>Mr. Johurul Ahomed</h4>
-                <p>ব্যালেন্স: 9600</p>
-            </div>
-        </div>
 
-        <!-- Company Section -->
-        <div class="company-section">
-            <img src="Img/Logo.png" alt="Company Logo" class="company-logo">
-            <h1>BD ALL SARVICE</h1>
-        </div>
-
-        <!-- Button Links -->
-        <div class="links">
-            <div class="link-row">
-                <button onclick="showContent('serverCopy')">
-                    <img src="Img/sv.png" alt="Server Copy"> সার্ভার কপি
-                </button>
-                <button onclick="showContent('autoNID')">
-                    <img src="Img/images-1.png" alt="Auto NID"> অটো এন আইডি মেক
-                </button>
-                <button onclick="showContent('manualNID')">
-                    <img src="Img/nid.png" alt="Manual NID"> ম্যানুয়ালি এনআইডি
-                </button>
-                <button onclick="showContent('biometric')">
-                    <img src="Img/bio.png" alt="Biometric"> সিমের বায়োমেট্রিক
-                </button>
-            </div>
-            <div class="link-row">
-                <button onclick="showContent('accountInfo')">
-                    <img src="Img/account info .jpg" alt="Account Info"> একাউন্ট ইনফো
-                </button>
-                <button onclick="showContent('birthReg')">
-                    <img src="Img/birth.png" alt="Birth Registration"> জন্ম নিবন্ধন মেক
-                </button>
-                <button onclick="showContent('autoRecharge')">
-                    <img src="Img/Add Many.png" alt="Auto Recharge"> অটো রিচার্জ
-                </button>
-                <button onclick="showContent('profileUpdate')">
-                    <img src="Img/profile .jpg" alt="Profile Update"> প্রফাইল আপডেট
-                </button>
-            </div>
-        </div>
-
-        <!-- Content View Section -->
-        <div id="content-view">
-            <!-- এখানে বাটন ক্লিক করলে কন্টেন্ট দেখাবে -->
-        </div>
+<div class="container">
+    <h1>Dashboard</h1>
+    <div class="button-container">
+        <button class="btn" id="todayTaskButton"><i class="fas fa-tasks"></i> Today's Task</button>
+        <button class="btn" id="completedTaskButton"><i class="fas fa-check-circle"></i> Completed Task</button>
+        <button class="btn"><i class="fas fa-exclamation-triangle"></i> Missing Task</button>
+        <button class="btn"><i class="fas fa-wallet"></i> Withdraw</button>
+        <button class="btn"><i class="fas fa-user-circle"></i> My Account</button>
+        <button class="btn"><i class="fas fa-headset"></i> Help Line</button>
     </div>
 
-    <script src="script.js"></script>
+    <div class="stats">
+        <div class="stat">
+            <span>Today's Task</span>
+            <span id="currentTasksCount">0</span>
+        </div>
+        <div class="stat">
+            <span>Completed Tasks</span>
+            <span id="completeTask">0</span>
+        </div>
+        <div class="stat">
+            <span>Missing Tasks</span>
+            <span id="missingTask">10</span>
+        </div>
+        <div class="stat">
+            <span>Balance</span>
+            <span id="balance">0</span> Taka
+        </div>
+    </div>
+    
+    <h2>Today's Tasks</h2>
+    <div id="tasks" class="task-list"></div>
+    
+    <h2>Completed Tasks</h2>
+    <div id="completedTasks" class="completed-tasks"></div>
+</div>
+
+<script>
+    const tasks = [
+        "https://youtu.be/lMEyQ-RCqgk?si=zDI0Mt0cC7QBoeG4",
+        "https://youtu.be/5lZ32NuVhGE?si=QYp1MDUqPL-wnmtZ",
+        "https://youtu.be/okRnWVZK8ME?si=1vf7fY3LZyujfQjv",
+        "https://youtu.be/Eb0f7P3avoM?si=iQuCgY5rdDVFBclX",
+        "https://youtu.be/dZorT4-a-V0?si=RSiDdUkWvxwdfuaF",
+        "https://youtu.be/ydDt6su2Tys?si=DrhOzYxTyJ2ZAnWe",
+        "https://youtu.be/dfc9sdEiN9o?si=i3omol8TLFleHBLJ",
+        "https://youtu.be/-QLXUFqmzTc?si=HPb-vpCndrsyjTA1",
+        "https://youtu.be/8HZaoLfYg5c?si=kwDHRLvmvcPRKz0z",
+        "https://youtu.be/weOBO6q5XsY?si=rrl-jgon8N-OpyJs"
+    ];
+
+    let completeTaskCount = 0;
+    let missingTaskCount = tasks.length;
+    let balance = 0;
+    let completedTasksList = [];
+
+    function updateStats() {
+        document.getElementById('missingTask').innerText = missingTaskCount;
+        document.getElementById('completeTask').innerText = completeTaskCount;
+        document.getElementById('balance').innerText = balance;
+    }
+
+    function displayTasks() {
+        const taskList = document.getElementById('tasks');
+        taskList.innerHTML = ''; // Clear previous tasks
+
+        for (let i = 0; i < 10; i++) {
+            const taskIndex = Math.floor(Math.random() * tasks.length);
+            const taskElement = document.createElement('div');
+            taskElement.className = 'task';
+            taskElement.innerHTML = `
+                <span>Video Task ${taskIndex + 1}</span>
+                <button class="btn" onclick="completeTask(${taskIndex})"><i class="fas fa-check"></i> Complete</button>
+            `;
+            taskList.appendChild(taskElement);
+        }
+
+        document.getElementById('currentTasksCount').innerText = '10'; // Update task count
+    }
+
+    function completeTask(taskIndex) {
+        completeTaskCount++;
+        missingTaskCount--;
+        balance += 10;
+        completedTasksList.push(`Task ${taskIndex + 1}: ${tasks[taskIndex]}`); // Add to completed tasks list
+        updateStats();
+        window.open(tasks[taskIndex], '_blank'); // Open the video in a new tab
+    }
+
+    function displayCompletedTasks() {
+        const completedTasksContainer = document.getElementById('completedTasks');
+        completedTasksContainer.innerHTML = ''; // Clear previous completed tasks
+
+        completedTasksList.forEach(task => {
+            const taskElement = document.createElement('div');
+            taskElement.innerText = task;
+            completedTasksContainer.appendChild(taskElement);
+        });
+    }
+
+    document.getElementById('todayTaskButton').addEventListener('click', displayTasks);
+    document.getElementById('completedTaskButton').addEventListener('click', displayCompletedTasks);
+
+    updateStats();
+</script>
+
 </body>
 </html>
