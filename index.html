@@ -1,191 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-around; /* Align buttons side by side */
-            margin: 20px 0;
-        }
-        .btn {
-            width: 130px; /* Slightly reduced width */
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
-        .stat {
-            flex: 1;
-            background: #28a745;
-            color: white;
-            padding: 20px;
-            margin: 0 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .stat span {
-            display: block;
-            font-size: 1.5em;
-        }
-        .task {
-            margin: 15px 0;
-            padding: 15px;
-            background: #e7e7e7;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .task-list {
-            margin-top: 20px;
-            text-align: left;
-        }
-        .completed-tasks {
-            margin-top: 20px;
-            text-align: left;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Dashboard</title>
+<style>
+    /* Basic Styling */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; }
+    .dashboard { width: 100%; max-width: 400px; margin: 20px; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .header h2 { font-size: 20px; color: #333; }
+    .balance { display: flex; align-items: center; }
+    .balance img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; }
+    .balance-info { text-align: right; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    .button { flex: 1 1 48%; background-color: #3498db; color: #fff; padding: 15px; border-radius: 8px; text-align: center; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .content { margin-top: 20px; }
+    .task-list { list-style-type: none; }
+    .task { padding: 8px; background: #e8f6f8; margin: 5px 0; border-radius: 5px; display: flex; flex-direction: column; }
+    .task-buttons { display: flex; gap: 5px; }
+    .task-buttons button { padding: 5px 10px; border-radius: 4px; border: none; cursor: pointer; color: #fff; }
+    .start-btn { background-color: #3498db; }
+    .claim-btn { background-color: #27ae60; }
+    .complete-btn { background-color: #e74c3c; }
+</style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Dashboard</h1>
-    <div class="button-container">
-        <button class="btn" id="todayTaskButton"><i class="fas fa-tasks"></i> Today's Task</button>
-        <button class="btn" id="completedTaskButton"><i class="fas fa-check-circle"></i> Completed Task</button>
-        <button class="btn"><i class="fas fa-exclamation-triangle"></i> Missing Task</button>
-        <button class="btn"><i class="fas fa-wallet"></i> Withdraw</button>
-        <button class="btn"><i class="fas fa-user-circle"></i> My Account</button>
-        <button class="btn"><i class="fas fa-headset"></i> Help Line</button>
+<div class="dashboard">
+    <div class="header">
+        <h2 id="greeting">Welcome, User</h2>
+        <div class="balance">
+            <img src="https://via.placeholder.com/40" alt="Profile">
+            <div class="balance-info">
+                <h4 id="username">User Name</h4>
+                <p>Balance: <span id="balance">৳0</span></p>
+            </div>
+        </div>
     </div>
 
-    <div class="stats">
-        <div class="stat">
-            <span>Today's Task</span>
-            <span id="currentTasksCount">0</span>
-        </div>
-        <div class="stat">
-            <span>Completed Tasks</span>
-            <span id="completeTask">0</span>
-        </div>
-        <div class="stat">
-            <span>Missing Tasks</span>
-            <span id="missingTask">10</span>
-        </div>
-        <div class="stat">
-            <span>Balance</span>
-            <span id="balance">0</span> Taka
-        </div>
+    <div class="buttons">
+        <div class="button" onclick="showTodayTasks()">Today Task</div>
+        <div class="button" onclick="showCompleteTasks()">Complete Task</div>
+        <div class="button" onclick="showWithdraw()">Withdraw</div>
+        <div class="button" onclick="showMyAccount()">My Account</div>
     </div>
-    
-    <h2>Today's Tasks</h2>
-    <div id="tasks" class="task-list"></div>
-    
-    <h2>Completed Tasks</h2>
-    <div id="completedTasks" class="completed-tasks"></div>
+
+    <div class="content" id="content"></div>
 </div>
 
 <script>
-    const tasks = [
-        "https://youtu.be/lMEyQ-RCqgk?si=zDI0Mt0cC7QBoeG4",
-        "https://youtu.be/5lZ32NuVhGE?si=QYp1MDUqPL-wnmtZ",
-        "https://youtu.be/okRnWVZK8ME?si=1vf7fY3LZyujfQjv",
-        "https://youtu.be/Eb0f7P3avoM?si=iQuCgY5rdDVFBclX",
-        "https://youtu.be/dZorT4-a-V0?si=RSiDdUkWvxwdfuaF",
-        "https://youtu.be/ydDt6su2Tys?si=DrhOzYxTyJ2ZAnWe",
-        "https://youtu.be/dfc9sdEiN9o?si=i3omol8TLFleHBLJ",
-        "https://youtu.be/-QLXUFqmzTc?si=HPb-vpCndrsyjTA1",
-        "https://youtu.be/8HZaoLfYg5c?si=kwDHRLvmvcPRKz0z",
-        "https://youtu.be/weOBO6q5XsY?si=rrl-jgon8N-OpyJs"
-    ];
-
-    let completeTaskCount = 0;
-    let missingTaskCount = tasks.length;
     let balance = 0;
-    let completedTasksList = [];
+    let tasks = Array.from({length: 10}, (_, i) => ({
+        id: i + 1,
+        name: `Task ${i + 1}`,
+        videoLink: `https://example.com/video${i + 1}`,
+        started: false,
+        claimed: false,
+        completed: false
+    }));
 
-    function updateStats() {
-        document.getElementById('missingTask').innerText = missingTaskCount;
-        document.getElementById('completeTask').innerText = completeTaskCount;
-        document.getElementById('balance').innerText = balance;
+    function updateBalance() {
+        document.getElementById('balance').textContent = `৳${balance}`;
     }
 
-    function displayTasks() {
-        const taskList = document.getElementById('tasks');
-        taskList.innerHTML = ''; // Clear previous tasks
+    function showTodayTasks() {
+        const content = document.getElementById('content');
+        const activeTasks = tasks.filter(task => !task.completed);
+        content.innerHTML = '<h3>Today\'s Tasks</h3><ul class="task-list">' +
+            (activeTasks.length ? activeTasks.map(task => `
+                <li class="task">
+                    <span>${task.name}</span>
+                    <div class="task-buttons">
+                        ${!task.started ? `<button class="start-btn" onclick="startTask(${task.id})">Start</button>` : ''}
+                        ${task.started && !task.claimed ? `<button class="claim-btn" onclick="claimTask(${task.id})">Claim</button>` : ''}
+                        ${task.claimed && !task.completed ? `<button class="complete-btn" onclick="completeTask(${task.id})">Complete</button>` : ''}
+                    </div>
+                </li>`
+            ).join('') : '<li>No tasks available</li>') +
+            '</ul>';
+    }
 
-        for (let i = 0; i < 10; i++) {
-            const taskIndex = Math.floor(Math.random() * tasks.length);
-            const taskElement = document.createElement('div');
-            taskElement.className = 'task';
-            taskElement.innerHTML = `
-                <span>Video Task ${taskIndex + 1}</span>
-                <button class="btn" onclick="completeTask(${taskIndex})"><i class="fas fa-check"></i> Complete</button>
-            `;
-            taskList.appendChild(taskElement);
+    function startTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task) {
+            task.started = true;
+            window.open(task.videoLink, '_blank');
+            showTodayTasks();
         }
-
-        document.getElementById('currentTasksCount').innerText = '10'; // Update task count
     }
 
-    function completeTask(taskIndex) {
-        completeTaskCount++;
-        missingTaskCount--;
-        balance += 10;
-        completedTasksList.push(`Task ${taskIndex + 1}: ${tasks[taskIndex]}`); // Add to completed tasks list
-        updateStats();
-        window.open(tasks[taskIndex], '_blank'); // Open the video in a new tab
+    function claimTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task && task.started) {
+            task.claimed = true;
+            showTodayTasks();
+        }
     }
 
-    function displayCompletedTasks() {
-        const completedTasksContainer = document.getElementById('completedTasks');
-        completedTasksContainer.innerHTML = ''; // Clear previous completed tasks
-
-        completedTasksList.forEach(task => {
-            const taskElement = document.createElement('div');
-            taskElement.innerText = task;
-            completedTasksContainer.appendChild(taskElement);
-        });
+    function completeTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task && task.claimed) {
+            task.completed = true;
+            balance += 2;
+            updateBalance();
+            showTodayTasks();
+        }
     }
 
-    document.getElementById('todayTaskButton').addEventListener('click', displayTasks);
-    document.getElementById('completedTaskButton').addEventListener('click', displayCompletedTasks);
+    function showCompleteTasks() {
+        const completedTasks = tasks.filter(task => task.completed);
+        const content = document.getElementById('content');
+        content.innerHTML = '<h3>Completed Tasks</h3><ul class="task-list">' +
+            (completedTasks.length ? completedTasks.map(task => `<li>${task.name}</li>`).join('') : '<li>No tasks completed</li>') +
+            '</ul>';
+    }
 
-    updateStats();
+    function showWithdraw() {
+        const content = document.getElementById('content');
+        content.innerHTML = `
+            <h3>Withdraw</h3>
+            <input type="text" id="bkashNumber" placeholder="Bkash Number">
+            <input type="number" id="withdrawAmount" placeholder="Amount">
+            <button onclick="withdraw()">Submit</button>`;
+    }
+
+    function withdraw() {
+        const amount = parseFloat(document.getElementById('withdrawAmount').value);
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            updateBalance();
+            alert('Withdraw successful');
+        } else {
+            alert('Invalid amount');
+        }
+    }
+
+    function showMyAccount() {
+        document.getElementById('content').innerHTML = `
+            <h3>My Account</h3>
+            <p><strong>Name:</strong> User Name</p>
+            <p><strong>Mobile:</strong> 0123456789</p>
+            <p><strong>Email:</strong> user@example.com</p>`;
+    }
+
+    function setGreeting() {
+        const hours = new Date().getHours();
+        let greeting = 'Good Evening';
+        if (hours < 12) greeting = 'Good Morning';
+        else if (hours < 18) greeting = 'Good Afternoon';
+        document.getElementById('greeting').textContent = `${greeting}, User`;
+    }
+
+    setGreeting();
+    updateBalance();
 </script>
 
 </body>
